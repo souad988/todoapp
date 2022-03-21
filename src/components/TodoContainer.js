@@ -1,5 +1,7 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Header from './Header';
+import InputTodo from './InputTodo';
 import TodosList from './TodosList';
 
 class TodoContainer extends React.Component {
@@ -8,17 +10,17 @@ class TodoContainer extends React.Component {
     this.state = {
       todos: [
         {
-          id: 1,
+          id: uuidv4(),
           title: 'Setup development environment',
-          completed: true,
+          completed: uuidv4(),
         },
         {
-          id: 2,
+          id: uuidv4(),
           title: 'Develop website and add content',
           completed: false,
         },
         {
-          id: 3,
+          id: uuidv4(),
           title: 'Deploy to live server',
           completed: false,
         },
@@ -26,17 +28,43 @@ class TodoContainer extends React.Component {
     };
   }
 
-  handleChange = () => {
-    console.log("clicked");
-  };
-
   render() {
+    const handleChange = (id) => {
+      this.setState({
+        todos: this.state.todos.map((todo) => {
+          if (todo.id === id) {
+            todo.completed = !todo.completed;
+          }
+          return todo;
+        }),
+      });
+    };
+
+    const delTodo = (id) => {
+      this.setState({
+        todos: [
+          ...this.state.todos.filter((todo) => todo.id !== id),
+        ],
+      });
+    };
+    const addTodoItem = (title) => {
+      const newTodo = {
+        id: uuidv4(),
+        title,
+        completed: false,
+      };
+      this.setState({
+        todos: [...this.state.todos, newTodo],
+      });
+    };
     const { todos } = this.state;
     return (
-      <div>
+      <div className="container">
+          <div className="inner">
         <Header />
-        <TodosList todos={todos} handleChangeProps={this.handleChange} />
-      </div>
+        <InputTodo addTodoItem={addTodoItem} />
+        <TodosList todos={todos} handleChangeProps={handleChange} deleteTodoProps={delTodo} />
+      </div></div>
     );
   }
 }
