@@ -1,18 +1,39 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./TodoItem.module.css"
 
 const TodoItem = ({
-  key, todo, handleChangeProps, deleteTodoProps,
-}) =>{ 
+   todo, handleChangeProps, deleteTodoProps, setUpdate
+}) =>{
+    const [editing,setEditing]=useState(false); 
     const completedStyle = {
         fontStyle: "italic",
         color: "#595959",
         opacity: 0.4,
         textDecoration: "line-through",
       }
+
+    let viewMode = {}
+    let editMode = {}
+      
+    if (editing) {
+      viewMode.display = "none"
+    } else {
+      editMode.display = "none"
+    }    
+
+    const handleEditing = () => {
+        console.log("edit mode activated");
+        setEditing(true);
+      }
+      const handleUpdatedDone = (e) => {
+        if (e.key === 'Enter') {
+          setEditing(false);
+        }
+      }  
     return(
-  <li key={key} className={styles.item}>
+  <li className={styles.item}>
+    <div style={viewMode} onClick={handleEditing} > 
     <input
       className={styles.checkbox}
       type="checkbox"
@@ -23,7 +44,15 @@ const TodoItem = ({
     {todo.title}
     </span>
     <button onClick={() => deleteTodoProps(todo.id)}>Delete</button>
-  
+    </div>
+    <input style={editMode} type="text" 
+           className={styles.textInput}
+           value={todo.title}
+           onChange={(e) => {
+              setUpdate(e.target.value, todo.id);
+            }}
+            onKeyDown={handleUpdatedDone}
+            />
   </li>
 )};
 
