@@ -7,7 +7,13 @@ const TodosList = ({
 }) => (
   <ul>
     {todos.map((todo) => (
-      <TodoItem key={todo.id} todo={todo} setUpdate={setUpdate} handleChangeProps={handleChangeProps} deleteTodoProps={deleteTodoProps} />
+      <TodoItem
+        key={todo.id}
+        todo={todo}
+        setUpdate={setUpdate}
+        handleChangeProps={handleChangeProps}
+        deleteTodoProps={deleteTodoProps}
+      />
     ))}
   </ul>
 );

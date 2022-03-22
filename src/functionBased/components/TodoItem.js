@@ -33,7 +33,7 @@ const TodoItem = ({
   };
   return (
     <li className={styles.item}>
-      <div onClick={() => setEditing(true)} style={viewMode}>
+      <div onDoubleClick={() => setEditing(true)} style={viewMode}>
         <input
           className={styles.checkbox}
           type="checkbox"
@@ -44,7 +44,7 @@ const TodoItem = ({
         <span style={todo.completed ? completedStyle : null}>
           {todo.title}
         </span>
-        <button onClick={() => deleteTodoProps(todo.id)}>Delete</button>
+        <button type="button" onClick={() => deleteTodoProps(todo.id)}>Delete</button>
       </div>
       <input
         style={editMode}
