@@ -20,7 +20,7 @@ const InputTodo = ({ ...props }) => {
       setInputText({
         title: '',
       });
-    } 
+    }
   };
 
   return (

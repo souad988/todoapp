@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './TodoItem.module.css';
 
 const TodoItem = ({
   todo, handleChangeProps, deleteTodoProps, setUpdate,
 }) => {
-
   const [editing, setEditing] = useState(false);
   const completedStyle = {
     fontStyle: 'italic',
