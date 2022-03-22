@@ -5,9 +5,6 @@ import styles from './TodoItem.module.css';
 const TodoItem = ({
   todo, handleChangeProps, deleteTodoProps, setUpdate,
 }) => {
-  useEffect(() => () => {
-    console.log('Cleaning up...');
-  }, []);
 
   const [editing, setEditing] = useState(false);
   const completedStyle = {

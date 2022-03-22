@@ -9,7 +9,6 @@ const TodoContainer = () => {
     // getting stored items
     const temp = localStorage.getItem('todos');
     const savedTodos = JSON.parse(temp);
-    console.log('saved todos', savedTodos);
     return savedTodos || [];
   };
   const [todos, setTodos] = useState(getInitialTodos());
